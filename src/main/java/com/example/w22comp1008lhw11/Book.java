@@ -5,23 +5,23 @@ public class Book {
     private double price;
 
     public Book(String title, String author, String imageLocation, double price) {
-        this.title = title;
-        this.author = author;
-        this.imageLocation = imageLocation;
-        this.price = price;
-    }
-
-    public int getTitleLength()
-    {
-        return 0;
+        setTitle(title);
+        setAuthor(author);
+        setImageLocation(imageLocation);
+        setPrice(price);
     }
 
     public String getTitle() {
         return title;
     }
 
+    /**
+     * The title must be at least 1 character in length
+     * @param title
+     */
     public void setTitle(String title) {
-        if (title != null)
+        title = title.trim();
+        if (title.length()>= 1)
             this.title = title;
         else
             throw new IllegalArgumentException("Book title must have at least 1 character");
@@ -31,8 +31,16 @@ public class Book {
         return author;
     }
 
+    /**
+     * The author must have at least 2 characters in the name.  This method will validate
+     * and set the instance variable
+     * @param author
+     */
     public void setAuthor(String author) {
-        this.author = author;
+        if (author.trim().length()>=2)
+            this.author = author.trim();
+        else
+            throw new IllegalArgumentException("Author name must be 2 or more characters");
     }
 
     public String getImageLocation() {
@@ -40,14 +48,24 @@ public class Book {
     }
 
     public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
+        if (imageLocation.startsWith("images/"))
+            this.imageLocation = imageLocation;
+        else
+            throw new IllegalArgumentException("the image location must start with 'images/'");
     }
 
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Valid book prices are in then range 0-2000 inclusive
+     * @param price 0 to 2000
+     */
     public void setPrice(double price) {
-        this.price = price;
+        if (price >=0 && price <=2000)
+            this.price = price;
+        else
+            throw new IllegalArgumentException("price must be in the range 0-2000");
     }
 }

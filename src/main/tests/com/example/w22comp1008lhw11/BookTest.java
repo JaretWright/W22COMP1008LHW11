@@ -8,10 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BookTest {
     private Book book;
+    private String nullTitle;
 
     @BeforeEach
     void setUp() {
-        book = new Book("Java 101","Jaret Wright","...",9.99);
+        book = new Book("Java 101","Jaret Wright","images/book.png",9.99);
     }
 
     @Test
@@ -35,8 +36,21 @@ class BookTest {
     }
 
     @Test
+    void setTitleInvalidNull() {
+        Assertions.assertThrows(NullPointerException.class, ()->{
+            book.setTitle(nullTitle);
+        });
+    }
+
+    @Test
     void setAuthor() {
         book.setAuthor("Jaret");
+        assertEquals("Jaret", book.getAuthor());
+    }
+
+    @Test
+    void setAuthor2() {
+        book.setAuthor("  Jaret ");
         assertEquals("Jaret", book.getAuthor());
     }
 

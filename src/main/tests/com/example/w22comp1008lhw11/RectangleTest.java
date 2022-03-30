@@ -26,6 +26,12 @@ class RectangleTest {
     }
 
     @Test
+    void setHeight2() {
+        rectangle.setHeight(1000);
+        assertEquals(1000, rectangle.getHeight());
+    }
+
+    @Test
     void setHeightInvalid(){
         Assertions.assertThrows(IllegalArgumentException.class, ()->{
             rectangle.setHeight(-5);
@@ -50,6 +56,13 @@ class RectangleTest {
     void setWidthInvalid(){
         Assertions.assertThrows(IllegalArgumentException.class, ()->{
             rectangle.setWidth(0);
+        });
+    }
+
+    @Test
+    void setWidthInvalidNegative(){
+        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+            rectangle.setWidth(-10);
         });
     }
 
